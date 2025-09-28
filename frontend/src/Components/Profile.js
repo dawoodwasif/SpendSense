@@ -37,6 +37,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import WorkIcon from "@mui/icons-material/Work";
 import PeopleIcon from "@mui/icons-material/People";
+import { API_BASE_URL } from "../config/api";
 
 const MotionPaper = motion(Paper);
 const MotionCard = motion(Card);
@@ -80,9 +81,9 @@ function Profile() {
     const token = localStorage.getItem("authToken");
     const storedUserName = localStorage.getItem("userName");
     const email = localStorage.getItem("userEmail");
-    
+
     setUserName(storedUserName || "");
-    
+
     if (!token) {
       alert("Please log in to access this page");
       navigate("/login");
@@ -92,7 +93,7 @@ function Profile() {
     const fetchData = async () => {
       try {
         // Fetch user profile
-        const userResponse = await fetch("http://localhost:5000/user-profile", {
+        const userResponse = await fetch(`${API_BASE_URL}/user-profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -106,7 +107,7 @@ function Profile() {
 
         // Fetch form data
         const formResponse = await fetch(
-          "http://localhost:5000/user-form-data",
+          `${API_BASE_URL}/user-form-data`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -124,13 +125,13 @@ function Profile() {
           // Add email from localStorage if not available from API
           email: userData.user?.email || email
         });
-        
+
         // If we got a name from the API, update the userName in localStorage
         if (userData.user && userData.user.name) {
           localStorage.setItem("userName", userData.user.name);
           setUserName(userData.user.name);
         }
-        
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -223,8 +224,8 @@ function Profile() {
   }
 
   return (
-    <MotionContainer 
-      maxWidth="lg" 
+    <MotionContainer
+      maxWidth="lg"
       sx={{ py: 6 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -236,10 +237,10 @@ function Profile() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         elevation={3}
-        sx={{ 
-          p: { xs: 3, md: 5 }, 
-          borderRadius: 2, 
-          mb: 4, 
+        sx={{
+          p: { xs: 3, md: 5 },
+          borderRadius: 2,
+          mb: 4,
           background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.primary.light} 90%)`,
           color: "white"
         }}
@@ -269,33 +270,33 @@ function Profile() {
                 {userData?.email || "No email available"}
               </Typography>
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, justifyContent: { xs: "center", md: "flex-start" } }}>
-                <Chip 
-                  label="Financial Advisory Client" 
-                  sx={{ 
-                    bgcolor: "rgba(255, 255, 255, 0.2)", 
+                <Chip
+                  label="Financial Advisory Client"
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.2)",
                     color: "white",
                     '& .MuiChip-label': { fontWeight: 500 }
-                  }} 
+                  }}
                 />
                 {formData && (
-                  <Chip 
-                    label="Assessment Completed" 
+                  <Chip
+                    label="Assessment Completed"
                     color="success"
-                    sx={{ 
-                      bgcolor: "rgba(0, 200, 83, 0.8)", 
+                    sx={{
+                      bgcolor: "rgba(0, 200, 83, 0.8)",
                       color: "white",
                       '& .MuiChip-label': { fontWeight: 500 }
-                    }} 
+                    }}
                   />
                 )}
               </Box>
             </Box>
           </Grid>
           <Grid item xs={12} md={2} sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-end" } }}>
-            <Button 
-              variant="outlined" 
+            <Button
+              variant="outlined"
               onClick={handleLogout}
-              sx={{ 
+              sx={{
                 borderColor: "rgba(255,255,255,0.7)",
                 color: "white",
                 '&:hover': {
@@ -312,9 +313,9 @@ function Profile() {
 
       {/* Profile Tabs */}
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs 
-          value={tabValue} 
-          onChange={handleTabChange} 
+        <Tabs
+          value={tabValue}
+          onChange={handleTabChange}
           aria-label="profile tabs"
           variant={isMobile ? "fullWidth" : "standard"}
           centered={!isMobile}
@@ -336,7 +337,7 @@ function Profile() {
             <Typography variant="h6" gutterBottom color="primary" sx={{ display: "flex", alignItems: "center", mb: 3 }}>
               <AccountCircleIcon sx={{ mr: 1 }} /> Personal Details
             </Typography>
-            
+
             <Grid container spacing={2}>
               {/* Left Column */}
               <Grid item xs={12} md={6}>
@@ -346,49 +347,49 @@ function Profile() {
                       <ListItemIcon>
                         <BadgeIcon color="primary" />
                       </ListItemIcon>
-                      <ListItemText 
-                        primary="Full Name" 
-                        secondary={userData?.name || userName} 
+                      <ListItemText
+                        primary="Full Name"
+                        secondary={userData?.name || userName}
                       />
                     </ListItem>
                   )}
-                  
+
                   {userData?.email && (
                     <ListItem>
                       <ListItemIcon>
                         <EmailIcon color="primary" />
                       </ListItemIcon>
-                      <ListItemText 
-                        primary="Email" 
-                        secondary={userData?.email} 
+                      <ListItemText
+                        primary="Email"
+                        secondary={userData?.email}
                       />
                     </ListItem>
                   )}
-                  
+
                   {(formData?.phone || userData?.phone) && (
                     <ListItem>
                       <ListItemIcon>
                         <PhoneIcon color="primary" />
                       </ListItemIcon>
-                      <ListItemText 
-                        primary="Phone" 
-                        secondary={formData?.phone || userData?.phone} 
+                      <ListItemText
+                        primary="Phone"
+                        secondary={formData?.phone || userData?.phone}
                       />
                     </ListItem>
                   )}
-                  
+
                   <ListItem>
                     <ListItemIcon>
                       <PersonIcon color="primary" />
                     </ListItemIcon>
-                    <ListItemText 
-                      primary="Age" 
-                      secondary={formData?.age || userData?.age || "35"} 
+                    <ListItemText
+                      primary="Age"
+                      secondary={formData?.age || userData?.age || "35"}
                     />
                   </ListItem>
                 </List>
               </Grid>
-              
+
               {/* Right Column */}
               <Grid item xs={12} md={6}>
                 <List>
@@ -396,29 +397,29 @@ function Profile() {
                     <ListItemIcon>
                       <FamilyRestroomIcon color="primary" />
                     </ListItemIcon>
-                    <ListItemText 
-                      primary="Marital Status" 
-                      secondary={formData?.maritalStatus || userData?.maritalStatus || "Married"} 
+                    <ListItemText
+                      primary="Marital Status"
+                      secondary={formData?.maritalStatus || userData?.maritalStatus || "Married"}
                     />
                   </ListItem>
-                  
+
                   <ListItem>
                     <ListItemIcon>
                       <WorkIcon color="primary" />
                     </ListItemIcon>
-                    <ListItemText 
-                      primary="Employment Status" 
-                      secondary={formData?.employmentStatus || userData?.employmentStatus || "Employed"} 
+                    <ListItemText
+                      primary="Employment Status"
+                      secondary={formData?.employmentStatus || userData?.employmentStatus || "Employed"}
                     />
                   </ListItem>
-                  
+
                   <ListItem>
                     <ListItemIcon>
                       <PeopleIcon color="primary" />
                     </ListItemIcon>
-                    <ListItemText 
-                      primary="Number of Dependents" 
-                      secondary={formData?.dependents || userData?.dependents || "2"} 
+                    <ListItemText
+                      primary="Number of Dependents"
+                      secondary={formData?.dependents || userData?.dependents || "2"}
                     />
                   </ListItem>
                 </List>
@@ -483,8 +484,8 @@ function Profile() {
                           <ListItemIcon>
                             <HomeIcon sx={{ color: theme.palette.success.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Primary Residence" 
+                          <ListItemText
+                            primary="Primary Residence"
                             secondary={`$${formData.primaryResidence || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -494,8 +495,8 @@ function Profile() {
                           <ListItemIcon>
                             <HomeIcon sx={{ color: theme.palette.success.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Other Real Estate" 
+                          <ListItemText
+                            primary="Other Real Estate"
                             secondary={`$${formData.otherRealEstate || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -505,8 +506,8 @@ function Profile() {
                           <ListItemIcon>
                             <SavingsIcon sx={{ color: theme.palette.success.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Retirement Accounts" 
+                          <ListItemText
+                            primary="Retirement Accounts"
                             secondary={`$${formData.retirementAccounts || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -516,8 +517,8 @@ function Profile() {
                           <ListItemIcon>
                             <AccountBalanceIcon sx={{ color: theme.palette.success.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Investment Accounts" 
+                          <ListItemText
+                            primary="Investment Accounts"
                             secondary={`$${formData.investmentAccounts || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -527,8 +528,8 @@ function Profile() {
                           <ListItemIcon>
                             <AccountBalanceIcon sx={{ color: theme.palette.success.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Cash Accounts" 
+                          <ListItemText
+                            primary="Cash Accounts"
                             secondary={`$${formData.cashAccounts || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -536,14 +537,14 @@ function Profile() {
                         </ListItem>
                         <Divider sx={{ my: 1 }} />
                         <ListItem sx={{ bgcolor: `${theme.palette.success.light}20` }}>
-                          <ListItemText 
-                            primary="Total Assets" 
+                          <ListItemText
+                            primary="Total Assets"
                             secondary={`$${calculateTotalAssets(formData)}`}
                             primaryTypographyProps={{ variant: "body1", fontWeight: "bold" }}
-                            secondaryTypographyProps={{ 
-                              variant: "h6", 
-                              fontWeight: "bold", 
-                              color: theme.palette.success.main 
+                            secondaryTypographyProps={{
+                              variant: "h6",
+                              fontWeight: "bold",
+                              color: theme.palette.success.main
                             }}
                           />
                         </ListItem>
@@ -570,8 +571,8 @@ function Profile() {
                           <ListItemIcon>
                             <HomeIcon sx={{ color: theme.palette.error.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Mortgage" 
+                          <ListItemText
+                            primary="Mortgage"
                             secondary={`$${formData.mortgage || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -581,8 +582,8 @@ function Profile() {
                           <ListItemIcon>
                             <DirectionsCarIcon sx={{ color: theme.palette.error.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Car Loans" 
+                          <ListItemText
+                            primary="Car Loans"
                             secondary={`$${formData.carLoans || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -592,8 +593,8 @@ function Profile() {
                           <ListItemIcon>
                             <CreditCardIcon sx={{ color: theme.palette.error.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Credit Card Debt" 
+                          <ListItemText
+                            primary="Credit Card Debt"
                             secondary={`$${formData.creditCardDebt || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -603,8 +604,8 @@ function Profile() {
                           <ListItemIcon>
                             <SchoolIcon sx={{ color: theme.palette.error.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Student Loans" 
+                          <ListItemText
+                            primary="Student Loans"
                             secondary={`$${formData.studentLoans || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -614,8 +615,8 @@ function Profile() {
                           <ListItemIcon>
                             <AccountBalanceIcon sx={{ color: theme.palette.error.main }} />
                           </ListItemIcon>
-                          <ListItemText 
-                            primary="Other Debts" 
+                          <ListItemText
+                            primary="Other Debts"
                             secondary={`$${formData.otherDebts || "0"}`}
                             primaryTypographyProps={{ variant: "body2" }}
                             secondaryTypographyProps={{ variant: "body1", fontWeight: "medium" }}
@@ -623,14 +624,14 @@ function Profile() {
                         </ListItem>
                         <Divider sx={{ my: 1 }} />
                         <ListItem sx={{ bgcolor: `${theme.palette.error.light}20` }}>
-                          <ListItemText 
-                            primary="Total Liabilities" 
+                          <ListItemText
+                            primary="Total Liabilities"
                             secondary={`$${calculateTotalLiabilities(formData)}`}
                             primaryTypographyProps={{ variant: "body1", fontWeight: "bold" }}
-                            secondaryTypographyProps={{ 
-                              variant: "h6", 
-                              fontWeight: "bold", 
-                              color: theme.palette.error.main 
+                            secondaryTypographyProps={{
+                              variant: "h6",
+                              fontWeight: "bold",
+                              color: theme.palette.error.main
                             }}
                           />
                         </ListItem>
@@ -646,10 +647,10 @@ function Profile() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                     elevation={3}
-                    sx={{ 
-                      p: 2, 
-                      bgcolor: theme.palette.primary.main, 
-                      color: "white" 
+                    sx={{
+                      p: 2,
+                      bgcolor: theme.palette.primary.main,
+                      color: "white"
                     }}
                   >
                     <CardContent>
@@ -683,7 +684,7 @@ function Profile() {
 // Helper functions to calculate financial totals
 function calculateTotalAssets(formData) {
   if (!formData) return "0";
-  
+
   const assetFields = [
     'primaryResidence',
     'otherRealEstate',
@@ -691,18 +692,18 @@ function calculateTotalAssets(formData) {
     'investmentAccounts',
     'cashAccounts'
   ];
-  
+
   const total = assetFields.reduce((sum, field) => {
     const value = parseFloat(formData[field]) || 0;
     return sum + value;
   }, 0);
-  
+
   return total.toLocaleString();
 }
 
 function calculateTotalLiabilities(formData) {
   if (!formData) return "0";
-  
+
   const liabilityFields = [
     'mortgage',
     'carLoans',
@@ -710,24 +711,24 @@ function calculateTotalLiabilities(formData) {
     'studentLoans',
     'otherDebts'
   ];
-  
+
   const total = liabilityFields.reduce((sum, field) => {
     const value = parseFloat(formData[field]) || 0;
     return sum + value;
   }, 0);
-  
+
   return total.toLocaleString();
 }
 
 function calculateNetWorth(formData) {
   if (!formData) return "0";
-  
+
   const totalAssets = calculateTotalAssets(formData).replace(/,/g, '');
   const totalLiabilities = calculateTotalLiabilities(formData).replace(/,/g, '');
-  
+
   const netWorth = parseFloat(totalAssets) - parseFloat(totalLiabilities);
-  
+
   return netWorth.toLocaleString();
 }
 
-export default Profile; 
+export default Profile;

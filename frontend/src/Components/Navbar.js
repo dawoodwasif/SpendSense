@@ -29,6 +29,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { API_BASE_URL } from "../config/api";
 
 export default function Navbar({ toggleColorMode, mode }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -55,7 +56,7 @@ export default function Navbar({ toggleColorMode, mode }) {
     if (authToken) {
       const fetchUserData = async () => {
         try {
-          const response = await fetch("http://localhost:5000/user-profile", {
+          const response = await fetch(`${API_BASE_URL}/user-profile`, {
             headers: {
               Authorization: `Bearer ${authToken}`,
             },

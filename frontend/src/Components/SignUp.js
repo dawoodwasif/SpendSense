@@ -27,6 +27,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import AppleIcon from "@mui/icons-material/Apple";
+import { API_BASE_URL } from "../config/api";
 
 const MotionBox = motion(Box);
 const MotionCard = motion(Card);
@@ -67,7 +68,7 @@ export default function SignUp() {
       return;
     }
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch(`${API_BASE_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -19,6 +19,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "../config/api";
 
 const MotionPaper = motion(Paper);
 
@@ -87,7 +88,7 @@ function Form() {
     // Fetch existing form data if available
     const fetchFormData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user-form-data", {
+        const response = await fetch(`${API_BASE_URL}/user-form-data`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -132,7 +133,7 @@ function Form() {
 
     try {
       // Submit form data
-      const formResponse = await fetch("http://localhost:5000/submit-form", {
+      const formResponse = await fetch(`${API_BASE_URL}/submit-form`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -148,7 +149,7 @@ function Form() {
 
       // Call goal analysis API
       const goalResponse = await fetch(
-        "http://localhost:5000/api/goal-analysis",
+        `${API_BASE_URL}/api/goal-analysis`,
         {
           method: "POST",
           headers: {

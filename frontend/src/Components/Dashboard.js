@@ -32,6 +32,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "../config/api";
 
 const MotionCard = motion(Card);
 
@@ -130,7 +131,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         // Fetch user profile
-        const userResponse = await fetch("http://localhost:5000/user-profile", {
+        const userResponse = await fetch(`${API_BASE_URL}/user-profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -144,7 +145,7 @@ function Dashboard() {
 
         // Fetch form data
         const formResponse = await fetch(
-          "http://localhost:5000/user-form-data",
+          `${API_BASE_URL}/user-form-data`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -191,7 +192,7 @@ function Dashboard() {
   const fetchTransactions = async () => {
     const token = localStorage.getItem("authToken");
     try {
-      const r = await fetch("http://localhost:5000/api/transactions", {
+      const r = await fetch(`${API_BASE_URL}/api/transactions`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const j = await r.json();
@@ -205,7 +206,7 @@ function Dashboard() {
     setLoadingTx(true);
     const token = localStorage.getItem("authToken");
     try {
-      await fetch("http://localhost:5000/api/transactions/import", {
+      await fetch(`${API_BASE_URL}/api/transactions/import`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -235,7 +236,7 @@ function Dashboard() {
     });
     const token = localStorage.getItem("authToken");
     try {
-      await fetch("http://localhost:5000/api/transactions/upload", {
+      await fetch(`${API_BASE_URL}/api/transactions/upload`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -252,7 +253,7 @@ function Dashboard() {
   const analyzeSpending = async () => {
     const token = localStorage.getItem("authToken");
     try {
-      const r = await fetch("http://localhost:5000/api/transactions/spending-analysis", {
+      const r = await fetch(`${API_BASE_URL}/api/transactions/spending-analysis`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -276,7 +277,7 @@ function Dashboard() {
     try {
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        "http://localhost:5000/api/investment-advice",
+        `${API_BASE_URL}/api/investment-advice`,
         {
           method: "POST",
           headers: {
@@ -350,7 +351,7 @@ function Dashboard() {
     setLoadingTx(true);
     const token = localStorage.getItem("authToken");
     try {
-      const response = await fetch("http://localhost:5000/api/transactions/manual", {
+      const response = await fetch(`${API_BASE_URL}/api/transactions/manual`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
