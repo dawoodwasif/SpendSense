@@ -1,0 +1,187 @@
+/* Existing styles */
+
+.parent-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Ensure no overflow */
+    transition: transform 1s ease-in-out; /* Smooth transition */
+}
+
+.logo2 {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    background-image: url('../Assets/Images/logo.svg'); /* Adjust the path if necessary */
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 10rem; /* Adjust the width as needed */
+    height: 10rem; /* Adjust the height as needed */
+    transition: top 0.5s ease-in-out; /* Smooth transition */
+}
+
+.parent-container.active .logo2 {
+    top: -10rem; /* Move the logo out of view */
+}
+
+.home {
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    flex-direction: row; /* Ensure columns are side by side */
+}
+
+.left-column {
+    width: 30%;
+    background-color: black; /* Just for visualization, change as needed */
+    color: #f15400; /* To make text visible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end; /* Align content to the right */
+}
+
+.right-column {
+    color: white; /* To make text visible */
+    background-color: black; /* Black background color for the column */
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the left */
+    position: relative; /* Ensure the bgimage can be positioned relative to this */
+    overflow: hidden; /* Ensure the image doesn't overflow the border radius */
+}
+
+.space {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 1px #f15400, 0 0 2px #f15400, 0 0 3px #f15400, 0 0 4px #f15400;  
+    }
+    50% {
+        text-shadow: 0 0 1px #f15400, 0 0 2px #f15400, 0 0 3px #f15400, 0 0 4px #f15400;
+    }
+} 
+
+.bgimage {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    background: url('../Assets/Images/image.jpg') no-repeat center center; /* Replace with your image path */
+    background-size: cover;
+    width: 90%;
+    height: 90vh;
+    position: absolute;
+    left: 30%;
+    right: 0; /* Start off-screen to the right */
+    transition: left 0.5s ease-in-out, transform 1s ease-in-out, margin-left 0.5s ease-in-out; /* Smooth transition */
+    z-index: 1;
+    border-top-left-radius: 20% 50%;
+    border-bottom-left-radius: 20% 50%; /* Smaller, more proportionate border radius */
+    /* filter: sepia(0.5) saturate(1.8) hue-rotate(30deg); Yellowish tone */
+}
+
+.bgimage.active {
+    left: 0; /* Move into view from the left */
+    width: 90vw; /* Cover the full screen width */
+    height: 90vh; /* Cover the full screen height */
+    border-radius: 0; /* Remove border radius to cover the full screen */
+    transform: scale(1); /* Scale the image to cover the screen */
+    transition: left 0.5s ease-in-out, transform 1s ease-in-out; /* Smooth transition */
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    border-top-left-radius: 20% 50%;
+    border-bottom-left-radius: 20% 50%; 
+    border-top-right-radius: 20% 50%;
+    border-bottom-right-radius: 20% 50%; 
+}
+
+.financial {
+    padding-top: 3rem;
+    font-size: 5rem;
+    position: relative; /* Ensure it is above the bgimage */
+    z-index: 3; /* Ensure it is above the bgimage */
+    cursor: pointer; /* Indicate it's interactive */
+    margin-right: 10px; /* Add some margin for spacing */
+    animation: glow 1.5s infinite alternate; /* Infinite glow animation */
+    transition: font-size 0.2s ease-in-out, transform 1s ease-in-out, bottom 0.5s ease-in-out; /* Smooth transition */
+}
+
+.advisory {
+    padding-top: 3rem;
+    font-size: 5rem;
+    position: relative; /* Ensure it is above the bgimage */
+    z-index: 3; /* Ensure it is above the bgimage */
+    cursor: pointer; /* Indicate it's interactive */
+    margin-left: 10px; /* Add some margin for spacing */
+    animation: glow 1.5s infinite alternate; /* Infinite glow animation */
+    transition: font-size 0.2s ease-in-out, transform 1s ease-in-out, bottom 0.5s ease-in-out; /* Smooth transition */
+}
+
+.parent-container.active .financial, 
+.parent-container.active .advisory {
+    font-size: 5rem; 
+    animation: glow 1.5s infinite alternate;
+    transform: translateY(40vh); /* Move text to bottom of the screen */
+    bottom: 0; /* Ensure it aligns at the bottom */
+}
+
+.parent-container.inactive .financial, 
+.parent-container.inactive .advisory {
+    transform: translateY(0); /* Reset text position */
+    transition-delay: 0.5s; /* Delay resetting the position */
+}
+
+.information-text {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    transition: opacity 1s ease-in-out; /* Smooth transition */
+    z-index: 2;
+    width: 80%; /* Adjust as needed */
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent background */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.parent-container.active .information-text {
+    opacity: 1; /* Show text */
+    transition-delay: 0.5s; /* Delay showing the text */
+}
+
+.parent-container.inactive .information-text {
+    opacity: 0; /* Hide text */
+    transition-delay: 0.1ms; /* Delay hiding the text */
+}
+
+.col {
+    background-color: black;
+    padding: 1rem;
+    border-radius: 5px; /* Rounded corners */
+    flex: 1;
+    margin: 0 1rem;
+    transition: background-color 1s ease-in-out; /* Smooth transition for background color */
+}
+
+.col h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #f15400; /* Orange color for heading */
+}
+
+.col p {
+    font-size: 1rem;
+    color: #fff; /* White color for content */
+}

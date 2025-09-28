@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="181.40625"
+   height="195.0625"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Sig_runes_(white).svg">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="973"
+     id="namedview8"
+     showgrid="false"
+     inkscape:zoom="3.4176827"
+     inkscape:cx="106.3792"
+     inkscape:cy="101.22882"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <path
+     style="fill:#262626;fill-opacity:1;stroke:#262626;stroke-width:1.79999995;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="M 85.28102,1.0625 46.365803,7.3736759 1.40625,122.46323 39.263954,117.17878 8.9337653,193.92329 48.931769,187.65096 93.868167,72.526394 56.010456,77.810842 85.281021,1.0625299 z"
+     id="path3802"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:#262626;fill-opacity:1;stroke:#262626;stroke-width:1.79999995;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="M 171.41576,1.0625 132.47145,7.3677497 87.540995,122.46322 125.3987,117.17877 95.068499,193.92328 135.03743,187.64504 180.00291,72.526404 142.14522,77.810852 171.41578,1.0625375 z"
+     id="path2993"
+     inkscape:connector-curvature="0" />
+</svg>
